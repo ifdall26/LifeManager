@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Life Manager</title>
+
+    <link rel="manifest" href="manifest.json" />
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <link rel="stylesheet" href="assets/css/mission.css" />
+    <link rel="stylesheet" href="assets/css/finance.css" />
+    <link rel="stylesheet" href="assets/css/vehicle.css" />
+  </head>
+  <body>
+    <div id="app">
+      <aside class="sidebar">
+        <div class="logo">Life Manager</div>
+
+        <nav>
+          <button class="nav-btn active" data-page="dashboard">
+            Dashboard
+          </button>
+
+          <button class="nav-btn" data-page="mission">Mission</button>
+
+          <button class="nav-btn" data-page="finance">Finance</button>
+
+          <button class="nav-btn" data-page="vehicle">Vehicle</button>
+        </nav>
+      </aside>
+
+      <main id="content">
+        <section id="dashboard" class="page active-page">
+          <h1>Dashboard</h1>
+
+          <div class="dashboard-cards">
+            <div class="card">
+              <h3>Total Saldo</h3>
+              <p id="dashboardBalance">Rp 0</p>
+            </div>
+
+            <div class="card">
+              <h3>Tugas Aktif</h3>
+              <p id="dashboardTask">0</p>
+            </div>
+
+            <div class="card">
+              <h3>Reminder Oli</h3>
+              <p id="dashboardOil">Aman</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="mission" class="page">
+          <h1>Mission</h1>
+
+          <div class="mission-form">
+            <input type="text" id="taskTitle" placeholder="Nama tugas" />
+
+            <input type="date" id="taskDeadline" />
+
+            <select id="taskPriority">
+              <option value="low">Low</option>
+
+              <option value="medium">Medium</option>
+
+              <option value="high">High</option>
+
+              <option value="epic">Epic</option>
+            </select>
+
+            <button id="addTaskBtn">Tambah Tugas</button>
+          </div>
+
+          <div id="taskList"></div>
+        </section>
+
+        <section id="finance" class="page">
+          <h1>Finance</h1>
+        </section>
+
+        <section id="vehicle" class="page">
+          <h1>Vehicle</h1>
+        </section>
+      </main>
+    </div>
+
+    <script src="assets/js/database.js"></script>
+    <script src="assets/js/router.js"></script>
+    <script src="assets/js/notification.js"></script>
+
+    <script src="assets/js/modules/dashboard.js"></script>
+    <script src="assets/js/modules/mission.js"></script>
+    <script src="assets/js/modules/finance.js"></script>
+    <script src="assets/js/modules/vehicle.js"></script>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
