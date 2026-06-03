@@ -6,6 +6,8 @@ function saveTasks() {
   renderTasks();
 
   updateDashboardTask();
+
+  updateMissionStats();
 }
 
 function renderTasks() {
@@ -19,6 +21,12 @@ function renderTasks() {
     const div = document.createElement("div");
 
     div.className = "task-card";
+
+    const today = new Date().toISOString().split("T")[0];
+
+    if (!task.completed && task.deadline && task.deadline < today) {
+      div.classList.add("task-overdue");
+    }
 
     if (task.completed) {
       div.classList.add("task-completed");
@@ -34,9 +42,17 @@ function renderTasks() {
                 </p>
 
                 <p>
-                Prioritas:
-                ${task.priority}
-                </p>
+
+<span class="
+priority-badge
+priority-${task.priority}
+">
+
+${task.priority.toUpperCase()}
+
+</span>
+
+</p>
             </div>
 
             <div>
@@ -108,4 +124,26 @@ function deleteTask(id) {
 
 document.getElementById("addTaskBtn")?.addEventListener("click", addTask);
 
+function updateMissionStats() {
+  const active = tasks.filter((t) => !t.completed).length;
+
+  const completed = tasks.filter((t) => t.completed).length;
+
+  document.getElementById("activeMissionCount").textContent = active;
+
+  document.getElementById("completedMissionCount").textContent = completed;
+
+  const total = tasks.length;
+
+  let percent = 0;
+
+  if (total > 0) {
+    percent = Math.round((completed / total) * 100);
+  }
+
+  document.getElementById("missionProgress").style.width = percent + "%";
+}
+
 renderTasks();
+
+updateMissionStats();

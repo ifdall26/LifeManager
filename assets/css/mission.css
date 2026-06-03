@@ -43,3 +43,62 @@
   opacity: 0.5;
   text-decoration: line-through;
 }
+
+.priority-low {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.priority-medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.priority-high {
+  background: #fed7aa;
+  color: #9a3412;
+}
+
+.priority-epic {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+.priority-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.task-overdue {
+  border-left: 6px solid red;
+}
+
+.mission-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.progress-container {
+  background: #e5e7eb;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 25px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #22c55e;
+  transition: 0.3s;
+}
