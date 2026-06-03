@@ -1,3 +1,5 @@
+console.log("MISSION.JS LOADED");
+
 const defaultDailyMission = [
   "Minum Air 8 Gelas",
 
@@ -20,6 +22,8 @@ function saveTasks() {
   updateDashboardTask();
 
   updateMissionStats();
+
+  updateUrgentTask();
 }
 
 function renderTasks() {
@@ -249,6 +253,24 @@ function toggleDailyMission(index) {
   renderDailyMission();
 }
 
+function checkTaskReminder() {
+  const today = new Date().toISOString().split("T")[0];
+
+  const overdueTasks = tasks.filter(
+    (task) => !task.completed && task.deadline && task.deadline <= today,
+  );
+
+  if (overdueTasks.length > 0) {
+    const task = overdueTasks[0];
+
+    showNotification(
+      "⚠️ Tugas Belum Selesai",
+
+      task.title,
+    );
+  }
+}
+
 initializeDailyMission();
 
 renderDailyMission();
@@ -256,3 +278,37 @@ renderDailyMission();
 renderTasks();
 
 updateMissionStats();
+
+updateUrgentTask();
+
+function checkTaskReminder() {
+  const today = new Date().toISOString().split("T")[0];
+
+  const overdueTasks = tasks.filter(
+    (task) => !task.completed && task.deadline && task.deadline <= today,
+  );
+
+  if (overdueTasks.length > 0) {
+    const task = overdueTasks[0];
+
+    showNotification(
+      "⚠️ Tugas Belum Selesai",
+
+      task.title,
+    );
+  }
+}
+
+requestNotificationPermission();
+
+setInterval(
+  checkTaskReminder,
+
+  10000,
+);
+
+console.log("REMINDER SYSTEM STARTED");
+
+setInterval(() => {
+  console.log("CHECKING TASKS...");
+}, 60000);
