@@ -1,3 +1,15 @@
+const defaultDailyMission = [
+  "Minum Air 8 Gelas",
+
+  "Olahraga",
+
+  "Review Keuangan",
+
+  "Kerjakan Tugas Utama",
+
+  "Rapikan Meja",
+];
+
 let tasks = Database.get("tasks");
 
 function saveTasks() {
@@ -143,6 +155,103 @@ function updateMissionStats() {
 
   document.getElementById("missionProgress").style.width = percent + "%";
 }
+
+function initializeDailyMission() {
+  const today = new Date().toISOString().split("T")[0];
+
+  const savedDate = localStorage.getItem("dailyMissionDate");
+
+  if (savedDate !== today) {
+    const missions = defaultDailyMission.map((item) => ({
+      title: item,
+
+      completed: false,
+    }));
+
+    Database.save("dailyMission", missions);
+
+    localStorage.setItem("dailyMissionDate", today);
+  }
+}
+
+function renderDailyMission() {
+  const container = document.getElementById("dailyMissionContainer");
+
+  if (!container) return;
+
+  const missions = Database.get("dailyMission");
+
+  const completed = missions.filter((m) => m.completed).length;
+
+  const percent = missions.length
+    ? Math.round((completed / missions.length) * 100)
+    : 0;
+
+  container.innerHTML = `
+
+        <div class="daily-progress">
+
+            <h3>
+            Progress Harian:
+            ${percent}%
+            </h3>
+
+            <div class="progress-container">
+
+                <div
+                    class="progress-bar"
+                    style="width:${percent}%">
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+  missions.forEach((mission, index) => {
+    const div = document.createElement("div");
+
+    div.className = "daily-card";
+
+    if (mission.completed) {
+      div.classList.add("completed");
+    }
+
+    div.innerHTML = `
+
+            <div
+            class="daily-title">
+
+            ${mission.title}
+
+            </div>
+
+            <input
+                type="checkbox"
+                ${mission.completed ? "checked" : ""}
+                onchange=
+                "toggleDailyMission(${index})">
+
+        `;
+
+    container.appendChild(div);
+  });
+}
+
+function toggleDailyMission(index) {
+  const missions = Database.get("dailyMission");
+
+  missions[index].completed = !missions[index].completed;
+
+  Database.save("dailyMission", missions);
+
+  renderDailyMission();
+}
+
+initializeDailyMission();
+
+renderDailyMission();
 
 renderTasks();
 
