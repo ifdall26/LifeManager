@@ -109,6 +109,37 @@
 
         <section id="finance" class="page">
           <h1>Finance</h1>
+
+          <div class="wallet-form">
+            <input type="text" id="walletName" placeholder="Nama Wallet" />
+
+            <input type="number" id="walletBalance" placeholder="Saldo Awal" />
+
+            <button id="addWalletBtn">Tambah Wallet</button>
+          </div>
+
+          <div id="walletList"></div>
+          <hr style="margin: 20px 0" />
+
+          <h2>Transaksi</h2>
+
+          <div class="transaction-form">
+            <select id="transactionWallet"></select>
+
+            <select id="transactionType">
+              <option value="income">Pemasukan</option>
+
+              <option value="expense">Pengeluaran</option>
+            </select>
+
+            <input type="number" id="transactionAmount" placeholder="Nominal" />
+
+            <input type="text" id="transactionNote" placeholder="Keterangan" />
+
+            <button id="addTransactionBtn">Simpan</button>
+          </div>
+
+          <div id="transactionList"></div>
         </section>
 
         <section id="vehicle" class="page">

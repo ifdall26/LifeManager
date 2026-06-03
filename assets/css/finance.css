@@ -1,0 +1,83 @@
+.wallet-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.wallet-form input {
+  padding: 10px;
+}
+
+.wallet-form button {
+  padding: 10px 20px;
+
+  background: #2563eb;
+
+  color: white;
+
+  border: none;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.wallet-card {
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 12px;
+
+  margin-bottom: 10px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.wallet-balance {
+  font-size: 20px;
+
+  font-weight: bold;
+}
+
+.transaction-form {
+  display: flex;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin: 20px 0;
+}
+
+.transaction-form input,
+.transaction-form select {
+  padding: 10px;
+}
+
+.transaction-form button {
+  padding: 10px 20px;
+}
+
+.transaction-card {
+  background: white;
+
+  padding: 15px;
+
+  border-radius: 10px;
+
+  margin-bottom: 10px;
+}
+
+.income {
+  border-left: 6px solid green;
+}
+
+.expense {
+  border-left: 6px solid red;
+}

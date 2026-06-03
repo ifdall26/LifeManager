@@ -39,5 +39,18 @@ function updateUrgentTask() {
     `;
 }
 
+function updateDashboardBalance() {
+  const wallets = Database.get("wallets");
+
+  const total = wallets.reduce((sum, wallet) => sum + wallet.balance, 0);
+
+  const element = document.getElementById("dashboardBalance");
+
+  if (element) {
+    element.textContent = "Rp " + total.toLocaleString();
+  }
+}
+
 updateDashboardTask();
 updateUrgentTask();
+updateDashboardBalance();

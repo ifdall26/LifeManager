@@ -304,11 +304,11 @@ requestNotificationPermission();
 setInterval(
   checkTaskReminder,
 
-  10000,
+  1000000,
 );
 
 console.log("REMINDER SYSTEM STARTED");
 
 setInterval(() => {
   console.log("CHECKING TASKS...");
-}, 60000);
+}, 6000000);
