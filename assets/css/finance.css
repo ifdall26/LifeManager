@@ -81,3 +81,36 @@
 .expense {
   border-left: 6px solid red;
 }
+
+.transfer-form {
+  display: flex;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin-top: 20px;
+}
+
+.transfer-form select,
+.transfer-form input {
+  padding: 10px;
+}
+
+.transfer-form button {
+  padding: 10px 20px;
+
+  border: none;
+
+  background: #16a34a;
+
+  color: white;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.transfer {
+  border-left: 6px solid #2563eb;
+}

@@ -9,6 +9,8 @@ function saveWallets() {
 
   renderWalletOptions();
 
+  renderTransferOptions();
+
   updateDashboardBalance();
 }
 
@@ -205,8 +207,99 @@ document
 
 document.getElementById("addWalletBtn")?.addEventListener("click", addWallet);
 
+function renderTransferOptions() {
+  const from = document.getElementById("transferFrom");
+
+  const to = document.getElementById("transferTo");
+
+  if (!from || !to) {
+    return;
+  }
+
+  from.innerHTML = "";
+  to.innerHTML = "";
+
+  wallets.forEach((wallet) => {
+    from.innerHTML += `
+            <option
+            value="${wallet.id}">
+            ${wallet.name}
+            </option>
+        `;
+
+    to.innerHTML += `
+            <option
+            value="${wallet.id}">
+            ${wallet.name}
+            </option>
+        `;
+  });
+}
+
+function transferBalance() {
+  const fromId = Number(document.getElementById("transferFrom").value);
+
+  const toId = Number(document.getElementById("transferTo").value);
+
+  const amount = Number(document.getElementById("transferAmount").value);
+
+  if (fromId === toId) {
+    alert("Wallet asal dan tujuan tidak boleh sama");
+
+    return;
+  }
+
+  const fromWallet = wallets.find((w) => w.id === fromId);
+
+  const toWallet = wallets.find((w) => w.id === toId);
+
+  if (!fromWallet || !toWallet) {
+    return;
+  }
+
+  if (amount <= 0) {
+    alert("Nominal tidak valid");
+
+    return;
+  }
+
+  if (fromWallet.balance < amount) {
+    alert("Saldo tidak cukup");
+
+    return;
+  }
+
+  fromWallet.balance -= amount;
+
+  toWallet.balance += amount;
+
+  transactions.unshift({
+    id: Date.now(),
+
+    wallet: `${fromWallet.name} → ${toWallet.name}`,
+
+    type: "transfer",
+
+    amount,
+
+    note: "Transfer Wallet",
+
+    date: new Date().toLocaleString(),
+  });
+
+  saveWallets();
+
+  saveTransactions();
+}
+
+document
+  .getElementById("transferBtn")
+  ?.addEventListener("click", transferBalance);
+
 renderWallets();
 
 renderWalletOptions();
+
+renderTransferOptions();
 
 renderTransactions();
